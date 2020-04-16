@@ -36,24 +36,41 @@ const Gameboard = (()=>{
         }
         return true;
     }
-    return {render,checkFinish,checkWin}
+
+    return {render,checkFinish,checkWin,reset}
 })()
 
 Gameflow = (()=>{
+    var winner="";
     document.querySelectorAll('.tile').forEach(tile => tile.addEventListener('click', getPosition));
     var turn = true;
     function toggleTurn(){
         turn = !turn;
     }
+
     function getPosition(event) { 
+        if (winner) return false; 
         position = event.target.dataset.spot;
         if(event.target.innerHTML == ""){
             turn? player1.place(position): player2.place(position);
             toggleTurn();
-            console.log(Gameboard.checkWin());
-            if (Gameboard.checkFinish()) alert("It's a tie!");
+            if (Gameboard.checkWin()){
+                winner = Gameboard.checkWin();
+                alert ("The winner is " + winner + "!")
+            }
+            if (Gameboard.checkFinish() && !Gameboard.checkWin()) alert("It's a tie!");
         } 
       }
+
+    const reset = ()=>{
+        winner="";
+        turn=true;
+        boardstatus = ["","","","","","","","",""];
+        Gameboard.render();
+
+    }
+      document.querySelector("#reset").addEventListener("click",reset);
+
     return{toggleTurn}
 })()
 
