@@ -1,0 +1,24 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameboard{
+    border: 3px solid;
+    height: 600px;
+    width: 600px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.tile{
+    border: 2px solid black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    font-family: arial;
+    font-weight: bold;
+}
